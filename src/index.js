@@ -2,10 +2,19 @@
 import _ from "lodash";
 // _ = _.noConflict();
 
-const api_url = "https://api.mainnet-beta.safecoin.org";
+var api_url = "https://api.mainnet-beta.safecoin.org";
+var realtime = true;
 
-fgetEpochInfo(api_url); 
-fgetSamples(api_url);
+if (realtime === true) {
+  setInterval(function () {
+    fgetEpochInfo(api_url);
+    fgetSamples(api_url);
+  }, 2500);
+} else { 
+  // only init
+  fgetEpochInfo(api_url);
+  fgetSamples(api_url);
+}
 
 async function fgetEpochInfo(url) {
   // Storing response
